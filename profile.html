@@ -1,0 +1,43 @@
+<!-- Toolbar -->
+<div flex="initial">
+    <md-toolbar id="topnav">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button">
+                <md-icon aria-label="Menu" md-svg-icon="https://s3-us-west-2.amazonaws.com/s.cdpn.io/68133/menu.svg"></md-icon>
+            </md-button>
+            <span flex></span>
+            <h1 id="title">Profile</h1>
+            <span flex></span>
+            <md-button class="md-icon-button">
+                <md-icon aria-label="Send" md-svg-icon="assets/icons/ic_forward_white_24px.svg"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+</div>
+<!-- Content -->
+<md-content flex layout="column">
+    <div flex="initial" layout="row">
+        <div flex-sm="30" flex-md="20" class="photo" layout layout-align="start start">
+            <img class="photo" aria-label="Profile Photo" src="assets/photos/Yaskin_Mike_13010.jpg" style="max-height: 100%; max-width: 100%;" />
+        </div>
+        <div flex layout="column" layout-align="start start">
+            <div class="name">Dad</div>
+            <div class="birthdate">Born: Sep 12, 1938</div>
+            <div class="email">
+                <md-icon aria-label="Send email" md-svg-icon="assets/icons/ic_email_black_24px.svg"></md-icon>dad@gmail.com
+            </div>
+            <div class="phone">
+                <md-icon aria-label="Call phone" md-svg-icon="assets/icons/ic_phone_black_24px.svg"></md-icon>571-555-DADD
+            </div>
+        </div>
+    </div>
+    <md-content flex-sm="70" flex-md="60" style="overflow-y: scroll;">
+        <md-subheader hide-sm>Medications</md-subheader>
+        <md-list>
+            <md-list-item ng-repeat="item in ['1', '2', '3', '4', '5']">
+                {{item}}
+                <md-divider ng-if="!last"></md-divider>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</md-content>
