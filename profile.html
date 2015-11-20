@@ -15,7 +15,7 @@
     </md-toolbar>
 </div>
 <!-- Content -->
-<md-content flex layout="column">
+<md-content flex layout="column" ng-controller="ProfileCtrl">
     <div flex="initial" layout="row">
         <div flex-sm="30" flex-md="20" class="photo" layout layout-align="start start">
             <img class="photo" aria-label="Profile Photo" src="assets/photos/Yaskin_Mike_13010.jpg" style="max-height: 100%; max-width: 100%;" />
@@ -31,13 +31,38 @@
             </div>
         </div>
     </div>
-    <md-content flex-sm="70" flex-md="60" style="overflow-y: scroll;">
+    <md-content flex="grow" style="overflow-y: scroll;">
         <md-subheader hide-sm>Medications</md-subheader>
         <md-list>
-            <md-list-item ng-repeat="item in ['1', '2', '3', '4', '5']">
+            <md-list-item ng-repeat="item in ['1', '2', '3', '4', '5']" ng-click="$mdDialog.show('#editMedication')">
                 {{item}}
                 <md-divider ng-if="!last"></md-divider>
+            </md-list-item>
+            <md-list-item ng-click="$mdDialog.show('#editMedication')">
+                Add
+                <md-divider></md-divider>
             </md-list-item>
         </md-list>
     </md-content>
 </md-content>
+<!-- Edit Form -->
+<md-dialog flex="0" id="editMedication" aria-label="Edit Medication">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Edit Medication</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" md-dialog-action="hide">
+                    <md-icon md-svg-src="assets/icons/ic_close_black_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            Form
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <md-button md-dialog-action="hide">Done</button>
+            <md-button md-dialog-action="cancel">Cancel</button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

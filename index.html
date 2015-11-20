@@ -33,7 +33,55 @@
                         $routeProvider.otherwise($view.attr('path'));
                     }
                 }
-           }]);
+           }])
+           .directive('mdDialogAction', ['$mdDialog', function($mdDialog) {
+               if (!$mdDialog._objectShow) {
+                   $mdDialog._objectShow = $mdDialog.show;
+                   $mdDialog.show = function(options) {
+                       if (typeof options === "string") {
+                           var $dialog = angular.element(document.querySelector(options));
+                           options = {
+                               template: $dialog.prop('outerHTML'),
+                               parent: angular.element(document.body)
+                           }
+                       }
+                       return this._objectShow(options);
+                   };
+               }
+               /*
+               var dialogs = document.querySelectorAll('md-dialog'),
+                   $dialog;
+               for (var i=0; i<dialogs.length; i++) {
+                   $dialog = angular.element(dialogs.item(i));
+                   
+               }
+               */
+               return {
+                   restrict: 'A',
+                   link: function(scope, element, attrs) {
+                       if (typeof attrs.mdDialogAction === "string" &&
+                           typeof $mdDialog[attrs.mdDialogAction] === "function") {
+                           element.on("click", function() {
+                               $mdDialog[attrs.mdDialogAction]();
+                           });
+                       }
+                   }
+               }
+           }])
+           .controller('ProfileCtrl', [
+                '$scope', 
+                '$mdDialog', 
+                function($scope, $mdDialog) {
+                    $scope.$mdDialog = $mdDialog;
+                    $scope.showEditForm = function(query) {
+                        $mdDialog.show({
+                            template: angular.element(document.querySelector(query)).html(),
+                            parent: angular.element(document.body),
+                            clickOutsideToClose:true
+                        })
+                    };
+                }
+           ]);
     </script>
 </body>
 </html>
